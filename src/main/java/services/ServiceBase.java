@@ -1,0 +1,31 @@
+/*
+Lesson 17Chapter 6.5
+テーブル操作用クラス（EmployeeServiceクラス）その１
+各Serviceクラスのスーパークラスとなるクラスです。
+SQL実行に共通で必要となる EntityManager インスタンスの作成やクローズ処理を実装
+*/
+package services;
+
+import javax.persistence.EntityManager;
+
+import utils.DBUtil;
+
+/**
+ * DB接続に関わる共通処理を行うクラス
+ */
+public class ServiceBase {
+
+    /**
+     * EntityManagerインスタンス
+     */
+    protected EntityManager em = DBUtil.createEntityManager();
+
+    /**
+     * EntityManagerのクローズ
+     */
+    public void close() {
+        if (em.isOpen()) {
+            em.close();
+        }
+    }
+}
