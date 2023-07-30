@@ -20,7 +20,11 @@ edit() メソッドを以下の内容で追記→edit.jspのビューへ。
 
 Lesson 17Chapter 6.11
 Employeeに対するアクションの作成6：update
-update() メソッドを以下の内容で追記
+update() メソッドを以下の内容で追記。既存の登録情報を更新できるようになった。
+
+Lesson 17Chapter 6.12
+Employeeに対するアクションの作成7：destroy
+destroy() メソッドを以下の内容で追記→削除できるようになった。
 
  http://localhost:8080/daily_report_system/?action=Employee&command=index
 
@@ -248,5 +252,29 @@ public void update() throws ServletException, IOException {
         }
     }
 }
+
+/**
+ * 論理削除を行う
+ * @throws ServletException
+ * @throws IOException
+ */
+public void destroy() throws ServletException, IOException {
+
+    //CSRF対策 tokenのチェック
+    if (checkToken()) {
+
+        //idを条件に従業員データを論理削除する
+        service.destroy(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+        //セッションに削除完了のフラッシュメッセージを設定
+        putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
+
+        //一覧画面にリダイレクト
+        redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
+    }
+}
+
+
+
 
 }
