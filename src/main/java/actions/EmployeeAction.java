@@ -8,7 +8,17 @@ entryNew() メソッドを以下の内容で追記
 
 Lesson 17Chapter 6.8
 Employeeに対するアクションの作成3：createその１
- create() メソッドを以下の内容で追記
+ create() メソッドを以下の内容で追記すると従業員登録できるように。
+
+Lesson 17Chapter 6.9
+Employeeに対するアクションとビューの作成4：showその１
+show() メソッドを以下の内容で追記
+
+Lesson 17Chapter 6.10
+Employeeに対するアクションとビューの作成5：editその１
+edit() メソッドを以下の内容で追記→edit.jspのビューへ。
+
+ http://localhost:8080/daily_report_system/?action=Employee&command=index
 
 */
 package actions;
@@ -141,6 +151,50 @@ public void create() throws ServletException, IOException {
 
     }
 }
+/**
+ * 詳細画面を表示する
+ * @throws ServletException
+ * @throws IOException
+ */
+public void show() throws ServletException, IOException {
 
+    //idを条件に従業員データを取得する
+    EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
+    if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
+
+        //データが取得できなかった、または論理削除されている場合はエラー画面を表示
+        forward(ForwardConst.FW_ERR_UNKNOWN);
+        return;
+    }
+
+    putRequestScope(AttributeConst.EMPLOYEE, ev); //取得した従業員情報
+
+    //詳細画面を表示
+    forward(ForwardConst.FW_EMP_SHOW);
+}
+/**
+ * 編集画面を表示する
+ * @throws ServletException
+ * @throws IOException
+ */
+public void edit() throws ServletException, IOException {
+
+    //idを条件に従業員データを取得する
+    EmployeeView ev = service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+    if (ev == null || ev.getDeleteFlag() == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()) {
+
+        //データが取得できなかった、または論理削除されている場合はエラー画面を表示
+        forward(ForwardConst.FW_ERR_UNKNOWN);
+        return;
+    }
+
+    putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+    putRequestScope(AttributeConst.EMPLOYEE, ev); //取得した従業員情報
+
+    //編集画面を表示する
+    forward(ForwardConst.FW_EMP_EDIT);
+
+}
 }
