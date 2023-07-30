@@ -2,17 +2,16 @@
 Lesson 17Chapter 5.4
 レイアウトファイルと共通エラー画面の作成その４
 
+Lesson 17Chapter 6.6
+Employeeに対するアクションとビューの作成1：indexの作成その３追記
+
 Lesson 16Chapter 15.2
 画面の装飾その３と一緒
-
 独自のCSS指定をするためのファイル
-
-
 Lesson 16Chapter 15.3
 フラッシュメッセージを出すその6
 装飾した形でメッセージを表示したい。
 一番下に追記。
-
 Lesson 16Chapter 15.5
 入力内容のチェック（バリデーション）その５
 一番下に #flush_error の定義を加えてください。
@@ -115,3 +114,19 @@ button {
 }
 
 
+table#employee_list th {
+    width: 30%;
+    padding: 10px 2%;
+}
+
+table#employee_list td {
+    width: 29%;
+    padding: 10px 2%;
+}
+
+tr.row1 {
+        background-color: #f2f2f2;
+}
+tr.row0 {
+        background-color: #ffffff;
+}
