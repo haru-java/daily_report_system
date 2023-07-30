@@ -18,6 +18,10 @@ Lesson 17Chapter 6.10
 Employeeに対するアクションとビューの作成5：editその１
 edit() メソッドを以下の内容で追記→edit.jspのビューへ。
 
+Lesson 17Chapter 6.11
+Employeeに対するアクションの作成6：update
+update() メソッドを以下の内容で追記
+
  http://localhost:8080/daily_report_system/?action=Employee&command=index
 
 */
@@ -197,4 +201,52 @@ public void edit() throws ServletException, IOException {
     forward(ForwardConst.FW_EMP_EDIT);
 
 }
+
+/**
+ * 更新を行う
+ * @throws ServletException
+ * @throws IOException
+ */
+public void update() throws ServletException, IOException {
+
+    //CSRF対策 tokenのチェック
+    if (checkToken()) {
+        //パラメータの値を元に従業員情報のインスタンスを作成する
+        EmployeeView ev = new EmployeeView(
+                toNumber(getRequestParam(AttributeConst.EMP_ID)),
+                getRequestParam(AttributeConst.EMP_CODE),
+                getRequestParam(AttributeConst.EMP_NAME),
+                getRequestParam(AttributeConst.EMP_PASS),
+                toNumber(getRequestParam(AttributeConst.EMP_ADMIN_FLG)),
+                null,
+                null,
+                AttributeConst.DEL_FLAG_FALSE.getIntegerValue());
+
+        //アプリケーションスコープからpepper文字列を取得
+        String pepper = getContextScope(PropertyConst.PEPPER);
+
+        //従業員情報更新
+        List<String> errors = service.update(ev, pepper);
+
+        if (errors.size() > 0) {
+            //更新中にエラーが発生した場合
+
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+            putRequestScope(AttributeConst.EMPLOYEE, ev); //入力された従業員情報
+            putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
+            //編集画面を再表示
+            forward(ForwardConst.FW_EMP_EDIT);
+        } else {
+            //更新中にエラーがなかった場合
+
+            //セッションに更新完了のフラッシュメッセージを設定
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+            //一覧画面にリダイレクト
+            redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
+        }
+    }
+}
+
 }
