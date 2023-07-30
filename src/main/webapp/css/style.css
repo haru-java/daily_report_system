@@ -5,6 +5,9 @@ Lesson 17Chapter 5.4
 Lesson 17Chapter 6.6
 Employeeに対するアクションとビューの作成1：indexの作成その３追記
 
+Lesson 17Chapter 6.7
+Employeeに対するアクションとビューの作成2：newその４追加
+
 Lesson 16Chapter 15.2
 画面の装飾その３と一緒
 独自のCSS指定をするためのファイル
@@ -129,4 +132,8 @@ tr.row1 {
 }
 tr.row0 {
         background-color: #ffffff;
+}
+
+select {
+    height: 30px;
 }

@@ -2,6 +2,10 @@
 Lesson 17Chapter 6.6
 Employeeに対するアクションとビューの作成1：indexの作成その１
 
+Lesson 17Chapter 6.7
+Employeeに対するアクションとビューの作成2：newその１
+entryNew() メソッドを以下の内容で追記
+
 */
 package actions;
 
@@ -68,5 +72,19 @@ public class EmployeeAction extends ActionBase {
         forward(ForwardConst.FW_EMP_INDEX);
 
     }
+
+/**
+ * 新規登録画面を表示する
+ * @throws ServletException
+ * @throws IOException
+ */
+public void entryNew() throws ServletException, IOException {
+
+    putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+    putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView()); //空の従業員インスタンス
+
+    //新規登録画面を表示
+    forward(ForwardConst.FW_EMP_NEW);
+ }
 
 }
