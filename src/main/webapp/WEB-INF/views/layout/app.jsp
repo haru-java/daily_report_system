@@ -24,7 +24,7 @@ Lesson 17Chapter 5.4
             </div>
         </div>
         <div id="content">${param.content}</div>
-        <div id="footer">by Taro Kirameki.</div>
+        <div id="footer">by Haru.</div>
     </div>
 </body>
 </html>
