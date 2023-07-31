@@ -4,7 +4,7 @@ Reportに対するアクションとビューの作成2：newその３
 
 動作確認：
 日報一覧から「新規日報の登録」のリンクで新規登録画面を表示
-
+http://localhost:8080/daily_report_system/?action=Report&command=index
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
