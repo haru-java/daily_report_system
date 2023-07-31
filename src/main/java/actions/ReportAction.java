@@ -7,11 +7,20 @@ Reportに対するアクションとビューの作成1：indexの作成その�
 Report と Employee というリソースの違いはありますが、実施している内容は EmployeeAction の index() メソッドとと同じ
 続きは
 /src/main/webapp/WEB-INF/views/reports/index.jspのビューへ。
+
+Lesson 17Chapter 9.7
+Reportに対するアクションとビューの作成2：new
+アクション。entryNew() メソッドを追記
+日報の日時は、事前に本日の日付を取得して格納しています。今日の日報を新規で登録する際、
+すでに今日の日付が入力欄に入っていた方が利用者にとって便利だからです。
+続きは/src/main/webapp/WEB-INF/views/reports/_form.jspとnew.jspへ。
+
  */
 
 package actions;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -72,5 +81,30 @@ public class ReportAction extends ActionBase {
         //一覧画面を表示
         forward(ForwardConst.FW_REP_INDEX);
     }
+
+    /**
+     * 新規登録画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void entryNew() throws ServletException, IOException {
+
+        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+
+        //日報情報の空インスタンスに、日報の日付＝今日の日付を設定する
+        ReportView rv = new ReportView();
+        rv.setReportDate(LocalDate.now());
+        putRequestScope(AttributeConst.REPORT, rv); //日付のみ設定済みの日報インスタンス
+
+        //新規登録画面を表示
+        forward(ForwardConst.FW_REP_NEW);
+
+    }
+
+
+
+
+
+
 
 }
