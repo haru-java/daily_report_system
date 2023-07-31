@@ -33,6 +33,10 @@ Reportに対するアクションとビューの作成4：showその３
 <pre> タグを使うと中の文字列の表示が小さい文字になるため、CSSで調整。
 http://localhost:8080/daily_report_system/?action=Report&command=index
 
+Lesson 17Chapter 10
+トップページに自分の日報一覧を表示するその３
+<h3> タグの文字（自分の日報　一覧）を少し大きくする。
+
 */
 @CHARSET "UTF-8";
 
@@ -201,7 +205,9 @@ pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
 }
 
-
+h3 {
+    font-size: larger;
+}
 
 
 
