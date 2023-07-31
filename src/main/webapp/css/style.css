@@ -28,6 +28,11 @@ Lesson 17Chapter 9.6
 Reportに対するアクションとビューの作成1：indexの作成その３
 http://localhost:8080/daily_report_system/?action=Report&command=index
 
+Lesson 17Chapter 9.9
+Reportに対するアクションとビューの作成4：showその３
+<pre> タグを使うと中の文字列の表示が小さい文字になるため、CSSで調整。
+http://localhost:8080/daily_report_system/?action=Report&command=index
+
 */
 @CHARSET "UTF-8";
 
@@ -190,6 +195,11 @@ table#report_list .report_action {
     width: 13%;
 }
 
+
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
 
 
 
