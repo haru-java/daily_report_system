@@ -24,6 +24,10 @@ Lesson 17Chapter 8.4
 追加とh1書き換え。
 http://localhost:8080/daily_report_system/?action=Auth&command=showLogin
 
+Lesson 17Chapter 9.6
+Reportに対するアクションとビューの作成1：indexの作成その３
+http://localhost:8080/daily_report_system/?action=Report&command=index
+
 */
 @CHARSET "UTF-8";
 
@@ -165,7 +169,26 @@ h1 a {
 }
 
 
+table#report_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
 
+table#report_list .report_name {
+    width: 20%;
+    padding: 10px 2%;
+}
+table#report_list .report_date {
+    width: 20%;
+}
+
+table#report_list .report_title {
+    width: 37%;
+}
+
+table#report_list .report_action {
+    width: 13%;
+}
 
 
 
